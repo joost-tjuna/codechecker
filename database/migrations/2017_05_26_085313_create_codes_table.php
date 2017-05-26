@@ -27,6 +27,6 @@ class CreateCodesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('codes');
+        Schema::dropIfExists('codes');
     }
 }
