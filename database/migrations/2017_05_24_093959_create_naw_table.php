@@ -15,7 +15,8 @@ class CreateNawTable extends Migration
     {
         Schema::create('naw', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('firstname');
+            $table->string('lastname');
             $table->string('email');
             $table->timestamps();
         });
