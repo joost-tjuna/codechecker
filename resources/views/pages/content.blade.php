@@ -13,12 +13,16 @@
             </div>
         @endif
 
+        <div class="error-message">
+            @include('flash::message')
+        </div>
+
     <div class="content">
         <form class="form-horizontal" role="form" method="POST" action="">
-            <div class="col-md-5">
-                <h2 class="label">Enter your code here!</h2>
-                <input id="code" type="text" class="form-control" name="code" style="height:40px; width:100%;" required autofocus>
-            </div>
+            {{ csrf_field() }}
+            <h2 class="">Enter your code here!</h2>
+            <input id="code" type="text" class="form-control" name="code" required autofocus>
+            <button type="submit" class="btn btn-success">Submit</button>
         </form>
 
     </div>
