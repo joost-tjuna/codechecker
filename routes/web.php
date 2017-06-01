@@ -14,6 +14,9 @@
 Route::get('/', 'PageController@index');
 Route::post('/', 'CheckController@check');
 
+Route::post('/check', 'CheckController@naw');
+
+Route::get('/location', 'PageController@location');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

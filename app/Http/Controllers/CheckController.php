@@ -16,37 +16,29 @@ class CheckController extends Controller
         if($check->count() && $used['used'] == 0){
 
             $check->update(['used' => 1]);
-
+            flash('Gefeliciteerd, vul uw gegevens in om verder te gaan.')->success();
             return view('pages.naw');
-
         }
         else{
 
             flash('Code niet juist, probeer een andere code')->error();
             return view('pages.content');
-
         }
     }
 
     public function naw(Request $request){
 
-        $this->validate(request(),[
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'required|unique',
+//        $this->validate($request->all(),[
+//            'firstname' => 'required',
+//            'lastname' => 'required',
+//            'email' => 'required|unique',
+//        ]);
 
-
-        ]);
-
-        $user = request(['fristname', 'lastname', 'email']);
+        $user = request(['firstname', 'lastname', 'email']);
 
         $user = Naw::create($user);
 
-        return view('/location');
-
-
-
+        return redirect('/location');
 
     }
-
 }
