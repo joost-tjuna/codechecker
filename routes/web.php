@@ -17,6 +17,11 @@ Route::post('/', 'CheckController@check');
 Route::post('/check', 'CheckController@naw');
 
 Route::get('/location', 'PageController@location');
-Auth::routes();
+
+
+Route::get('/location/{id}', [
+    'uses' =>'TicketController@location_check',
+    'as' => 'pages.location']);
 
 Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
