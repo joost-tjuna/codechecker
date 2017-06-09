@@ -23,5 +23,15 @@ Route::get('/location/{id}', [
     'uses' =>'TicketController@location_check',
     'as' => 'pages.location']);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [ 'as' => 'cms.home', 'uses' => 'HomeController@index'])->name('home');
+Route::get('/home/locations', [ 'as' => 'cms.locations', 'uses' => 'HomeController@locations']);
+
+Route::get('/home/locations/{id}', 'HomeController@showUpdate');
+Route::post('/home/locations/{id}', 'HomeController@update');
+
+Route::get('/home/add', 'HomeController@showAdd');
+Route::post('/home/add', 'HomeController@add');
+
+Route::get('/home/delete/{id}', 'HomeController@delete');
+//Route::get('/admin', ['as' =>'pages.cms', 'uses' => 'cmsController@index', 'middleware' => ['auth', 'admin']]);
 Auth::routes();
