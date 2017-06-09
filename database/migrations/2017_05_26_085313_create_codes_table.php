@@ -17,7 +17,7 @@ class CreateCodesTable extends Migration
 
             $table->string('id');
             $table->primary('id');
-            $table->string('used');
+            $table->string('used')->default('0');
             $table->timestamps();
         });
     }
