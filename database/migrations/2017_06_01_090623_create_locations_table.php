@@ -20,7 +20,7 @@ class CreateLocationsTable extends Migration
             $table->string('zipcode');
             $table->string('address');
             $table->integer('housenumber');
-            $table->integer('ticket-amount');
+            $table->integer('ticketAmount');
             $table->timestamps();
         });
     }

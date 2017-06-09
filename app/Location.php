@@ -12,7 +12,7 @@ class location extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'place','zipcode', 'address','housenumber',
+        'name', 'place','zipcode', 'address','housenumber', 'ticketAmount',
     ];
     /**
      * The attributes that should be hidden for arrays.
