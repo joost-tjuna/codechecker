@@ -11,9 +11,10 @@ class CheckController extends Controller
 {
     public function check(Request $request) {
 
-        $id = $request->code;
-        $check = Code::where('id', $id);
-        $used = Code::find($id);
+        $code = $request->code;
+        $check = Code::where('code', $code);
+        $used = Code::find($code);
+//        dd($check);
         if($check->count()  && $used['used'] == 0){
 
             $check->update(['used' => 1]);
