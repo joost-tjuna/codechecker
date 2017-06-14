@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Code;
+use App\Naw;
 use Illuminate\Http\Request;
 use App\Location;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Item;
+use DB;
+
 
 class HomeController extends Controller
 {
@@ -100,6 +106,58 @@ class HomeController extends Controller
 
         return redirect('/home/locations');
 
+    }
+
+    public function showNaw(){
+        $naws = Naw::all();
+
+        return view('cms.naw', compact('naws'));
+    }
+
+    public function excel(){
+
+        $naws = Naw::all();
+
+        Excel::create('Naw', function($excel) use($naws) {
+
+            // Set the spreadsheet title, creator, and description
+            $excel->setTitle('Naw gegevens');
+            $excel->setCreator('Codechecker')->setCompany('Tjuna');
+            $excel->setDescription('Naw gegevens');
+
+            $excel->sheet('Sheetname', function($sheet) use($naws) {
+
+                $sheet->fromArray($naws);
+
+            });
+
+        })->download('xlsx');
+    }
+
+    public function showCode(){
+        $codes = Code::all();
+
+
+        return view('cms.code', compact('codes'));
+    }
+
+    public function importExcel(Request $request)
+    {
+        if($request->hasFile('import_file')){
+            $path = $request->file('import_file')->getRealPath();
+            $data = Excel::load($path, function($reader) {
+            })->get();
+            if(!empty($data) && $data->count()){
+                foreach ($data as $key => $value) {
+                    $insert[] = ['code' => $value->code];
+                }
+                if(!empty($insert)){
+                    DB::table('codes')->insert($insert);
+                    flash('Uploaden geslaagd ', 'success');
+                    return redirect('/home/codes');
+                }
+            }
+        }
     }
 
 }

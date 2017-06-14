@@ -32,6 +32,17 @@ Route::post('/home/locations/{id}', 'HomeController@update');
 Route::get('/home/add', 'HomeController@showAdd');
 Route::post('/home/add', 'HomeController@add');
 
+Route::get('/home/naw', 'HomeController@showNaw');
+Route::get('/home/excel',
+[
+    'as' => 'admin.invoices.excel',
+    'uses' => 'HomeController@excel'
+]);
+
+Route::get('/home/codes', 'HomeController@showCode');
+Route::post('/home/codes', 'HomeController@importExcel');
+
+Route::get('/home/excel', 'HomeController@excel');
 Route::get('/home/delete/{id}', 'HomeController@delete');
 //Route::get('/admin', ['as' =>'pages.cms', 'uses' => 'cmsController@index', 'middleware' => ['auth', 'admin']]);
 Auth::routes();
