@@ -51,23 +51,7 @@
                 </div>
 
             </div>
-            <div class="panel pull-left nav-cms col-md-1">
-                <table>
-                    <tr style="margin-top:5px;">
-                        <th>
-                            <a href="/home/locations">location</a>
-                        </th>
-                    </tr>
-
-                    <tr>
-                        <th>
-                            <hr>
-
-                            <a href="#">Naw</a>
-                        </th>
-                    </tr>
-                </table>
-            </div>
+            @include('layouts.cms_nav')
         </div>
     </div>
     </div>
