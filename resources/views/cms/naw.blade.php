@@ -13,7 +13,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <table >
+                        <table style="margin: auto;">
                             <tr>
                                 <th class="location-th"><p>ID</p></th>
                                 <th class="location-th"><p>Name</p></th>
