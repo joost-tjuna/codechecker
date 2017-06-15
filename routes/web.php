@@ -19,30 +19,24 @@ Route::post('/check', 'CheckController@naw');
 Route::get('/location', 'PageController@location');
 
 
-Route::get('/location/{id}', [
-    'uses' =>'TicketController@location_check',
-    'as' => 'pages.location']);
+Route::get('/location/{id}', ['uses' =>'TicketController@location_check', 'as' => 'pages.location']);
 
-Route::get('/home', [ 'as' => 'cms.home', 'uses' => 'HomeController@index'])->name('home');
-Route::get('/home/locations', [ 'as' => 'cms.locations', 'uses' => 'HomeController@locations']);
+Route::get('/home', [ 'as' => 'cms.home', 'uses' => 'HomeController@index', 'middleware' => ['auth', 'admin']]);
+Route::get('/home/locations', [ 'as' => 'cms.locations', 'uses' => 'HomeController@locations', 'middleware' => ['auth', 'admin']]);
 
-Route::get('/home/locations/{id}', 'HomeController@showUpdate');
-Route::post('/home/locations/{id}', 'HomeController@update');
+Route::get('/home/locations/{id}', ['uses' =>'HomeController@showUpdate', 'middleware' => ['auth', 'admin']]);
+Route::post('/home/locations/{id}', ['uses' => 'HomeController@update', 'middleware' => ['auth', 'admin']]);
 
-Route::get('/home/add', 'HomeController@showAdd');
-Route::post('/home/add', 'HomeController@add');
+Route::get('/home/add', ['uses' => 'HomeController@showAdd', 'middleware' => ['auth', 'admin']]);
+Route::post('/home/add', ['uses' => 'HomeController@add', 'middleware' => ['auth', 'admin']]);
 
-Route::get('/home/naw', 'HomeController@showNaw');
-Route::get('/home/excel',
-[
-    'as' => 'admin.invoices.excel',
-    'uses' => 'HomeController@excel'
-]);
+Route::get('/home/naw', ['uses' => 'HomeController@showNaw', 'middleware' => ['auth', 'admin']]);
+Route::get('/home/excel', ['as' => 'admin.invoices.excel', 'uses' => 'HomeController@excel', 'middleware' => ['auth', 'admin']]);
 
-Route::get('/home/codes', 'HomeController@showCode');
-Route::post('/home/codes', 'HomeController@importExcel');
+Route::get('/home/codes', ['uses' => 'HomeController@showCode', 'middleware' => ['auth', 'admin']]);
+Route::post('/home/codes', ['uses' => 'HomeController@importExcel', 'middleware' => ['auth', 'admin']]);
 
-Route::get('/home/excel', 'HomeController@excel');
-Route::get('/home/delete/{id}', 'HomeController@delete');
-//Route::get('/admin', ['as' =>'pages.cms', 'uses' => 'cmsController@index', 'middleware' => ['auth', 'admin']]);
+Route::get('/home/excel', ['uses' =>'HomeController@excel', 'middleware' => ['auth', 'admin']]);
+Route::get('/home/delete/{id}', ['uses' => 'HomeController@delete', 'middleware' => ['auth', 'admin']]);
+
 Auth::routes();
