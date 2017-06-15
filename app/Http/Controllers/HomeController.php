@@ -143,6 +143,10 @@ class HomeController extends Controller
 
     public function importExcel(Request $request)
     {
+        $this->validate(request(),[
+            'import_file' => 'required|file|mimes:xlsx,xls',
+        ]);
+
         if($request->hasFile('import_file')){
             $path = $request->file('import_file')->getRealPath();
             $data = Excel::load($path, function($reader) {
